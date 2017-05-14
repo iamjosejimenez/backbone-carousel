@@ -12,10 +12,9 @@ module.exports = ->
       tasks: ['jshint']
 
       files: [
-        'dist/source.js'
-        'dist/test-runner.js'
+        'docs/source.js'
+        'docs/test-runner.js'
         'app/styles/**/*.css'
         'index.html'
         'package.json'
       ]
-
