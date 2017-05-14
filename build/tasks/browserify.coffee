@@ -17,7 +17,7 @@ module.exports = ->
           debug: true
 
       src: 'app/index.js'
-      dest: 'dist/source.js'
+      dest: 'docs/source.js'
 
     production:
       options:
@@ -25,8 +25,8 @@ module.exports = ->
           bundler.transform(global: true, 'uglifyify')
 
       src: 'app/index.js'
-      dest: 'dist/source.min.js'
+      dest: 'docs/source.min.js'
 
     testing:
       src: 'test/runner.js'
-      dest: 'dist/test-runner.js'
+      dest: 'docs/test-runner.js'

@@ -5,4 +5,4 @@ module.exports = ->
   @config 'processhtml',
     release:
       files:
-        'dist/index.html': ['index.html']
+        'docs/index.html': ['index.html']

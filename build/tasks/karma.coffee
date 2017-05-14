@@ -23,7 +23,7 @@ module.exports = ->
 
       files: [
         'test/assert.js'
-        'dist/test-runner.js'
+        'docs/test-runner.js'
       ]
 
     # This creates a server that will automatically run your tests when you
