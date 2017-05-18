@@ -182,7 +182,7 @@ var Component = function (_LayoutManager) {
 
 exports.default = Component;
 
-},{"jquery":10,"layoutmanager":11,"underscore":13}],2:[function(require,module,exports){
+},{"jquery":8,"layoutmanager":9,"underscore":11}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -198,10 +198,6 @@ var _backbone2 = _interopRequireDefault(_backbone);
 var _home = require('./views/pages/home');
 
 var _home2 = _interopRequireDefault(_home);
-
-var _sampleComponent = require('./views/components/sample-component');
-
-var _sampleComponent2 = _interopRequireDefault(_sampleComponent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -238,7 +234,7 @@ var Router = function (_Backbone$Router) {
 
 exports.default = Router;
 
-},{"./views/components/sample-component":4,"./views/pages/home":7,"backbone":9}],3:[function(require,module,exports){
+},{"./views/pages/home":4,"backbone":7}],3:[function(require,module,exports){
 module.exports = {
 _partials: {},
 _filters: {},
@@ -269,7 +265,7 @@ render: function(data) {
 try {
 return function anonymous(data,template
 /**/) {
-return '' + '<h1>Testing this out</h1>\n'
+return '' + '<div class="carousel">\n  <h2>Carousel App</h2>\n  <button type="button" class="btn btn-primary" id="back-button">anterior</button>\n  <div class="carousel-image-container"></div>\n  <button type="button" class="btn btn-primary" id="next-button">siguiente</button>\n</div>\n'
 }(data, this);
 } catch (ex) {
 function type(value) {
@@ -295,136 +291,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _component = require('../../component');
+var _backbone = require('backbone');
 
-var _component2 = _interopRequireDefault(_component);
-
-var _sampleComponent = require('./sample-component.html');
-
-var _sampleComponent2 = _interopRequireDefault(_sampleComponent);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var SampleComponent = _component2.default.extend({
-  template: _sampleComponent2.default,
-
-  events: {
-    'click h1': 'handleClick'
-  },
-
-  handleClick: function handleClick(ev) {
-    console.log('whatever');
-  }
-});
-
-exports.default = _component2.default.register('sample-component', SampleComponent);
-
-},{"../../component":1,"./sample-component.html":3}],5:[function(require,module,exports){
-module.exports = {
-_partials: {"partials/nav": require("/home/jljb1990/Trabajo/backbone/backbone-boilerplate/app/views/partials/nav.html")},
-_filters: {},
-getPartial: function getPartial(name) {
-    if (name in this._partials) {
-        return this._partials[name];
-    } else if (this._parent) {
-        return this._parent.getPartial(name);
-    }
-    throw new Error('Missing partial ' + name);
-},
-getFilter: function getFilter(name) {
-    if (name in this._filters) {
-        return this._filters[name];
-    } else if (this._parent) {
-        return this._parent.getFilter(name);
-    }
-    throw new Error('Missing filter ' + name);
-},
-registerPartial: function registerPartial(partialName, template) {
-    this._partials[partialName] = template;
-    template._parent = this;
-},
-registerFilter: function registerFilter(name, callback) {
-    this._filters[name] = callback;
-},
-render: function(data) {
-try {
-return function anonymous(data,template
-/**/) {
-return '' + (template.getPartial('partials/nav').render(null))+'\n<section class="content">\n'+(template.getPartial('content').render(null))+'</section>\n'
-}(data, this);
-} catch (ex) {
-function type(value) {
-    return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
-}
-function encode(raw) {
-    if (type(raw) !== 'string') {
-        return raw;
-    }
-    return raw.replace(/["&'<>`]/g, function (match) {
-        return '&#' + match.charCodeAt(0) + ';';
-    });
-}
-console.error(ex);
-return '<pre>' + encode(ex + ex.stack) + '</pre>';
-}
-}
-}
-},{"/home/jljb1990/Trabajo/backbone/backbone-boilerplate/app/views/partials/nav.html":8}],6:[function(require,module,exports){
-module.exports = {
-_partials: {"layouts/page": require("/home/jljb1990/Trabajo/backbone/backbone-boilerplate/app/views/layouts/page.html")},
-_filters: {},
-getPartial: function getPartial(name) {
-    if (name in this._partials) {
-        return this._partials[name];
-    } else if (this._parent) {
-        return this._parent.getPartial(name);
-    }
-    throw new Error('Missing partial ' + name);
-},
-getFilter: function getFilter(name) {
-    if (name in this._filters) {
-        return this._filters[name];
-    } else if (this._parent) {
-        return this._parent.getFilter(name);
-    }
-    throw new Error('Missing filter ' + name);
-},
-registerPartial: function registerPartial(partialName, template) {
-    this._partials[partialName] = template;
-    template._parent = this;
-},
-registerFilter: function registerFilter(name, callback) {
-    this._filters[name] = callback;
-},
-render: function(data) {
-try {
-return function anonymous(data,template
-/**/) {
-return '' + (template.getPartial('layouts/page').registerPartial('content', { render: function(_data) {data = _data || data;return '  '+'<'+'h2'+'>'+'a'+' '+'modern'+' '+'web'+' '+'application'+' '+'architecture'+'<'+'/h2'+'>'+'\n';}, data: data, _filters: {}, _partials: {} }),template.getPartial('layouts/page').render(data))
-}(data, this);
-} catch (ex) {
-function type(value) {
-    return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
-}
-function encode(raw) {
-    if (type(raw) !== 'string') {
-        return raw;
-    }
-    return raw.replace(/["&'<>`]/g, function (match) {
-        return '&#' + match.charCodeAt(0) + ';';
-    });
-}
-console.error(ex);
-return '<pre>' + encode(ex + ex.stack) + '</pre>';
-}
-}
-}
-},{"/home/jljb1990/Trabajo/backbone/backbone-boilerplate/app/views/layouts/page.html":5}],7:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _backbone2 = _interopRequireDefault(_backbone);
 
 var _component = require('../../component');
 
@@ -434,21 +303,110 @@ var _home = require('./home.html');
 
 var _home2 = _interopRequireDefault(_home);
 
-require('../components/sample-component');
+var _image = require('./image/image');
+
+var _image2 = _interopRequireDefault(_image);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var fetchImages = function fetchImages() {
+  return [{
+    title: 'First block',
+    images: ['https://img.clipartfest.com/f1c794050ae6208b8ef22ce9de850586_example-example_1502-889.jpeg', 'https://thumbs.dreamstime.com/z/example-stamp-28420393.jpg']
+  }, {
+    title: 'Second block',
+    images: ['http://www.addictedtoibiza.com/wp-content/uploads/2012/12/example.png', 'https://crossfitfaith.files.wordpress.com/2011/07/example-jpg.png']
+  }];
+};
+
+var Image = _backbone2.default.Model.extend({});
+
+var Images = _backbone2.default.Collection.extend({
+  model: Image
+});
+
+var Element = _backbone2.default.Model.extend({});
+
+var Carousel = _backbone2.default.Collection.extend({
+  model: Element
+});
+
+var dataToModels = function dataToModels(data) {
+  var elements = data.map(function (_ref) {
+    var title = _ref.title,
+        images = _ref.images;
+
+    var imagesCollection = new Images(images.map(function (image) {
+      return new Image({ url: image });
+    }));
+    return new Element({
+      title: title,
+      images: imagesCollection
+    });
+  });
+  return new Carousel({ elements: elements });
+};
+
 exports.default = _component2.default.extend({
   template: _home2.default,
+  events: {
+    'click #back-button': 'previousPicture',
+    'click #next-button': 'nextPicture'
+  },
+  renderImage: function renderImage() {
+    this.image.set({
+      url: this.images[this.index]
+    });
+    this.imageView.render();
+  },
+  afterRender: function afterRender() {
+    this.updateButtons();
+  },
 
+  updateButtons: function updateButtons() {
+    if (this.index + 1 >= this.images.length) {
+      this.$el.find('#next-button').addClass('disabled');
+    } else {
+      this.$el.find('#next-button').removeClass('disabled');
+    }
+    if (this.index) {
+      this.$el.find('#back-button').removeClass('disabled');
+    } else {
+      this.$el.find('#back-button').addClass('disabled');
+    }
+  },
+  previousPicture: function previousPicture() {
+    if (this.index - 1 >= 0) {
+      this.index -= 1;
+      this.updateButtons();
+      this.renderImage();
+    }
+  },
+  nextPicture: function nextPicture() {
+    if (this.index + 1 < this.images.length) {
+      this.$el.find('#back-button').removeClass('disabled');
+      this.index += 1;
+      this.updateButtons();
+      this.renderImage();
+    }
+  },
   initialize: function initialize() {
-    this.template.registerPartial('nav', require('../partials/nav.html'));
+    this.images = fetchImages()[0].images;
+    var randomNumber = 1; //Math.floor(Math.random() * this.images.length);
+    this.index = randomNumber;
+    this.image = new Image({
+      url: this.images[randomNumber]
+    });
+    this.imageView = new _image2.default({
+      model: this.image
+    });
+    this.setViews({
+      '.carousel-image-container': this.imageView
+    });
   }
 });
 
-// Import components.
-
-},{"../../component":1,"../components/sample-component":4,"../partials/nav.html":8,"./home.html":6}],8:[function(require,module,exports){
+},{"../../component":1,"./home.html":3,"./image/image":6,"backbone":7}],5:[function(require,module,exports){
 module.exports = {
 _partials: {},
 _filters: {},
@@ -479,7 +437,18 @@ render: function(data) {
 try {
 return function anonymous(data,template
 /**/) {
-return '' + '<nav>\n  <div class="header"></div>\n\n  <h1>Backbone Boilerplate</h1>\n\n  <hr>\n\n  <a href="#getting-started">Getting started</a>\n  <a href="#components">Components</a>\n  <a href="#components">Deployment</a>\n</nav>\n'
+function type(value) {
+    return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
+};
+function encode(raw) {
+    if (type(raw) !== 'string') {
+        return raw;
+    }
+    return raw.replace(/["&'<>`]/g, function (match) {
+        return '&#' + match.charCodeAt(0) + ';';
+    });
+};
+return '' + '<img class="carousel-image" src="'+( typeof data['url'] === 'function' ? encode(data['url']()) : encode(data['url']) == null ? '' : encode(data['url']) )+'">\n'
 }(data, this);
 } catch (ex) {
 function type(value) {
@@ -498,7 +467,38 @@ return '<pre>' + encode(ex + ex.stack) + '</pre>';
 }
 }
 }
-},{}],9:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _backbone = require('backbone');
+
+var _backbone2 = _interopRequireDefault(_backbone);
+
+var _image = require('./image.html');
+
+var _image2 = _interopRequireDefault(_image);
+
+var _component = require('../../../component');
+
+var _component2 = _interopRequireDefault(_component);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _component2.default.extend({
+  template: _image2.default,
+  serialize: function serialize() {
+    return {
+      url: this.model.get('url')
+    };
+  },
+  manage: true
+});
+
+},{"../../../component":1,"./image.html":5,"backbone":7}],7:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.3.3
 
@@ -2422,7 +2422,7 @@ return '<pre>' + encode(ex + ex.stack) + '</pre>';
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":10,"underscore":13}],10:[function(require,module,exports){
+},{"jquery":8,"underscore":11}],8:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.4
  * http://jquery.com/
@@ -12238,7 +12238,7 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}],11:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (global){
 /*!
  * backbone.layoutmanager.js v0.9.7
@@ -13406,7 +13406,7 @@ return LayoutManager;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"backbone":12,"jquery":10,"underscore":13}],12:[function(require,module,exports){
+},{"backbone":10,"jquery":8,"underscore":11}],10:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.1
 
@@ -15283,7 +15283,7 @@ return LayoutManager;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":10,"underscore":13}],13:[function(require,module,exports){
+},{"jquery":8,"underscore":11}],11:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -16833,7 +16833,7 @@ return LayoutManager;
   }
 }.call(this));
 
-},{}],14:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 require('./tests/example');
@@ -16845,7 +16845,7 @@ if (!window.__karma__) {
   mocha.run();
 }
 
-},{"./tests/example":15,"./tests/router":16}],15:[function(require,module,exports){
+},{"./tests/example":13,"./tests/router":14}],13:[function(require,module,exports){
 "use strict";
 
 describe("Simple tests examples", function () {
@@ -16897,7 +16897,7 @@ describe("Async tests", function () {
   });
 });
 
-},{}],16:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 var _backbone = require('backbone');
@@ -16918,4 +16918,4 @@ describe("Router", function () {
   });
 });
 
-},{"../../app/router":2,"backbone":9}]},{},[14]);
+},{"../../app/router":2,"backbone":7}]},{},[12]);

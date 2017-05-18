@@ -1,6 +1,5 @@
 import Backbone from 'backbone';
 import HomePage from './views/pages/home';
-import Component from './views/components/sample-component';
 
 const routes = {
   '': 'index',
