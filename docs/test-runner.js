@@ -182,7 +182,7 @@ var Component = function (_LayoutManager) {
 
 exports.default = Component;
 
-},{"jquery":8,"layoutmanager":9,"underscore":11}],2:[function(require,module,exports){
+},{"jquery":10,"layoutmanager":11,"underscore":13}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -234,7 +234,43 @@ var Router = function (_Backbone$Router) {
 
 exports.default = Router;
 
-},{"./views/pages/home":4,"backbone":7}],3:[function(require,module,exports){
+},{"./views/pages/home":6,"backbone":9}],3:[function(require,module,exports){
+module.exports=[{
+  "title": "sports",
+  "images": [
+    "http://animationvisarts.com/wp-content/uploads/2016/10/yourstory-Recreational-Sports-InsideArticle2.jpg",
+    "https://yt3.ggpht.com/onI7jrH8ZWTnfJgXzGHnfRIuwMZqN0GctBWnsqnSS9ZeIgSed8K2H6sZYW_DQnQs6nyedKk3jl8cvOX-e1I=s900-nd-c-c0xffffffff-rj-k-no",
+    "https://blogs-images.forbes.com/jasonbelzer/files/2015/02/sports_business.jpg"
+  ]
+}, {
+  "title": "fashion",
+  "images": [
+    "http://ell.h-cdn.co/assets/17/07/640x320/landscape-1487086531-elle-bella-hadid-best-looks.jpg",
+    "https://redracc.com/wp-content/uploads/2017/01/9187566_orig.jpg",
+    "http://ell.h-cdn.co/assets/16/37/980x490/elle-trends-spring-summer-2017-beach-stripes.jpg"
+  ]
+}]
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _images = require('./images.json');
+
+var _images2 = _interopRequireDefault(_images);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var fetchImages = function fetchImages() {
+  return _images2.default;
+};
+
+exports.default = fetchImages;
+
+},{"./images.json":3}],5:[function(require,module,exports){
 module.exports = {
 _partials: {},
 _filters: {},
@@ -295,7 +331,7 @@ return '<pre>' + encode(ex + ex.stack) + '</pre>';
 }
 }
 }
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -318,22 +354,16 @@ var _image = require('./image/image');
 
 var _image2 = _interopRequireDefault(_image);
 
+var _images = require('../../services/images');
+
+var _images2 = _interopRequireDefault(_images);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BACK_PICTURE_BUTTON = 'back-picture-button';
 var NEXT_PICTURE_BUTTON = 'next-picture-button';
 var BACK_GALLERY_BUTTON = 'back-gallery-button';
 var NEXT_GALLERY_BUTTON = 'next-gallery-button';
-
-var fetchImages = function fetchImages() {
-  return [{
-    title: 'Deportes',
-    images: ['https://img.clipartfest.com/f1c794050ae6208b8ef22ce9de850586_example-example_1502-889.jpeg', 'https://thumbs.dreamstime.com/z/example-stamp-28420393.jpg']
-  }, {
-    title: 'Moda',
-    images: ['http://www.addictedtoibiza.com/wp-content/uploads/2012/12/example.png', 'https://crossfitfaith.files.wordpress.com/2011/07/example-jpg.png']
-  }];
-};
 
 var Image = _backbone2.default.Model.extend({});
 
@@ -443,7 +473,7 @@ exports.default = _component2.default.extend({
   },
 
   initialize: function initialize() {
-    this.galleries = fetchImages();
+    this.galleries = (0, _images2.default)();
 
     var randomNumber = Math.floor(Math.random() * this.galleries.length);
     this.galleryIndex = randomNumber;
@@ -469,7 +499,7 @@ exports.default = _component2.default.extend({
   }
 });
 
-},{"../../component":1,"./home.html":3,"./image/image":6,"backbone":7}],5:[function(require,module,exports){
+},{"../../component":1,"../../services/images":4,"./home.html":5,"./image/image":8,"backbone":9}],7:[function(require,module,exports){
 module.exports = {
 _partials: {},
 _filters: {},
@@ -530,7 +560,7 @@ return '<pre>' + encode(ex + ex.stack) + '</pre>';
 }
 }
 }
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -560,7 +590,7 @@ exports.default = _component2.default.extend({
   }
 });
 
-},{"../../../component":1,"./image.html":5,"backbone":7}],7:[function(require,module,exports){
+},{"../../../component":1,"./image.html":7,"backbone":9}],9:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.3.3
 
@@ -2484,7 +2514,7 @@ exports.default = _component2.default.extend({
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":8,"underscore":11}],8:[function(require,module,exports){
+},{"jquery":10,"underscore":13}],10:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.2.4
  * http://jquery.com/
@@ -12300,7 +12330,7 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function (global){
 /*!
  * backbone.layoutmanager.js v0.9.7
@@ -13468,7 +13498,7 @@ return LayoutManager;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"backbone":10,"jquery":8,"underscore":11}],10:[function(require,module,exports){
+},{"backbone":12,"jquery":10,"underscore":13}],12:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.1
 
@@ -15345,7 +15375,7 @@ return LayoutManager;
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":8,"underscore":11}],11:[function(require,module,exports){
+},{"jquery":10,"underscore":13}],13:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -16895,7 +16925,7 @@ return LayoutManager;
   }
 }.call(this));
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 require('./tests/example');
@@ -16907,7 +16937,7 @@ if (!window.__karma__) {
   mocha.run();
 }
 
-},{"./tests/example":13,"./tests/router":14}],13:[function(require,module,exports){
+},{"./tests/example":15,"./tests/router":16}],15:[function(require,module,exports){
 "use strict";
 
 describe("Simple tests examples", function () {
@@ -16959,7 +16989,7 @@ describe("Async tests", function () {
   });
 });
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 var _backbone = require('backbone');
@@ -16980,4 +17010,4 @@ describe("Router", function () {
   });
 });
 
-},{"../../app/router":2,"backbone":7}]},{},[12]);
+},{"../../app/router":2,"backbone":9}]},{},[14]);

@@ -2,27 +2,12 @@ import Backbone from 'backbone';
 import Component from '../../component';
 import template from './home.html';
 import ImageView from './image/image';
+import fetchImages from '../../services/images';
 
 const BACK_PICTURE_BUTTON = 'back-picture-button';
 const NEXT_PICTURE_BUTTON = 'next-picture-button';
 const BACK_GALLERY_BUTTON = 'back-gallery-button';
 const NEXT_GALLERY_BUTTON = 'next-gallery-button';
-
-const fetchImages = () => {
-  return [{
-    title: 'Deportes',
-    images: [
-      'https://img.clipartfest.com/f1c794050ae6208b8ef22ce9de850586_example-example_1502-889.jpeg',
-      'https://thumbs.dreamstime.com/z/example-stamp-28420393.jpg'
-    ]
-  }, {
-    title: 'Moda',
-    images: [
-      'http://www.addictedtoibiza.com/wp-content/uploads/2012/12/example.png',
-      'https://crossfitfaith.files.wordpress.com/2011/07/example-jpg.png'
-    ]
-  }];
-};
 
 const Image = Backbone.Model.extend({});
 
