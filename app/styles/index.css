@@ -1,7 +1,69 @@
 @import '../../node_modules/purecss/build/pure.css';
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
+body {
+  height: 100vh;
+}
+
+main {
+  height: 100vh;
+  background-color: #232C33;
+}
+
+h3 {
+  color: #DADFF7;
+}
+
+.button-text {
+  color: #232C33;
+}
+
+.button {
+  height: 5vh;
+  align-self: center;
+  background-color: #B5B2C2;
+}
+
+.gallery-button {
+  height: 5vh;
+}
+
 .carousel-image {
-  height: 450px;
-  width: 450px;
+  height: 480px;
+  width: 640px;
+}
+
+.carousel {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  width: 50vw;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 50vw;
+}
+
+.carousel-container {
+  display: flex;
+  width: 70vw;
+  justify-content: space-around;
+}
+
+.carousel-image-container {
+  border-radius: 10px;
+  border-width: 10px;
+  border-color: #A0C1D1;
+  border-style: solid;
 }

@@ -265,7 +265,18 @@ render: function(data) {
 try {
 return function anonymous(data,template
 /**/) {
-return '' + '<div class="carousel">\n  <h2>Carousel App</h2>\n  <button type="button" class="btn btn-primary" id="back-button">anterior</button>\n  <div class="carousel-image-container"></div>\n  <button type="button" class="btn btn-primary" id="next-button">siguiente</button>\n</div>\n'
+function type(value) {
+    return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
+};
+function encode(raw) {
+    if (type(raw) !== 'string') {
+        return raw;
+    }
+    return raw.replace(/["&'<>`]/g, function (match) {
+        return '&#' + match.charCodeAt(0) + ';';
+    });
+};
+return '' + '<div class="carousel">\n    <div class="title">\n      <button type="button" class="btn button" id="back-gallery-button">\n        <p class="button-text"><strong>PREVIOUS</strong></p>\n      </button>\n      <h3><strong>'+( typeof data['title'] === 'function' ? encode(data['title']()) : encode(data['title']) == null ? '' : encode(data['title']) )+'</strong></h3>\n      <button type="button" class="btn button" id="next-gallery-button">\n        <p class="button-text"><strong>NEXT</strong></p>\n      </button>\n    </div>\n    <div class="carousel-container">\n      <button type="button" class="btn button" id="back-picture-button">\n        <p class="button-text"><strong>PREVIOUS</strong></p>\n      </button>\n      <div class="carousel-image-container"></div>\n      <button type="button" class="btn button" id="next-picture-button">\n        <p class="button-text"><strong>NEXT</strong></p>\n      </button>\n    </div>\n</div>\n'
 }(data, this);
 } catch (ex) {
 function type(value) {
@@ -309,12 +320,17 @@ var _image2 = _interopRequireDefault(_image);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var BACK_PICTURE_BUTTON = 'back-picture-button';
+var NEXT_PICTURE_BUTTON = 'next-picture-button';
+var BACK_GALLERY_BUTTON = 'back-gallery-button';
+var NEXT_GALLERY_BUTTON = 'next-gallery-button';
+
 var fetchImages = function fetchImages() {
   return [{
-    title: 'First block',
+    title: 'Deportes',
     images: ['https://img.clipartfest.com/f1c794050ae6208b8ef22ce9de850586_example-example_1502-889.jpeg', 'https://thumbs.dreamstime.com/z/example-stamp-28420393.jpg']
   }, {
-    title: 'Second block',
+    title: 'Moda',
     images: ['http://www.addictedtoibiza.com/wp-content/uploads/2012/12/example.png', 'https://crossfitfaith.files.wordpress.com/2011/07/example-jpg.png']
   }];
 };
@@ -347,15 +363,18 @@ var dataToModels = function dataToModels(data) {
   return new Carousel({ elements: elements });
 };
 
+var events = {};
+events['click #' + NEXT_PICTURE_BUTTON] = 'nextPicture';
+events['click #' + BACK_PICTURE_BUTTON] = 'previousPicture';
+events['click #' + NEXT_GALLERY_BUTTON] = 'nextGallery';
+events['click #' + BACK_GALLERY_BUTTON] = 'previousGallery';
+
 exports.default = _component2.default.extend({
   template: _home2.default,
-  events: {
-    'click #back-button': 'previousPicture',
-    'click #next-button': 'nextPicture'
-  },
+  events: events,
   renderImage: function renderImage() {
     this.image.set({
-      url: this.images[this.index]
+      url: this.images[this.pictureIndex]
     });
     this.imageView.render();
   },
@@ -364,45 +383,89 @@ exports.default = _component2.default.extend({
   },
 
   updateButtons: function updateButtons() {
-    if (this.index + 1 >= this.images.length) {
-      this.$el.find('#next-button').addClass('disabled');
+    if (this.pictureIndex + 1 >= this.images.length) {
+      this.$el.find('#' + NEXT_PICTURE_BUTTON).addClass('disabled');
     } else {
-      this.$el.find('#next-button').removeClass('disabled');
+      this.$el.find('#' + NEXT_PICTURE_BUTTON).removeClass('disabled');
     }
-    if (this.index) {
-      this.$el.find('#back-button').removeClass('disabled');
+    if (this.pictureIndex) {
+      this.$el.find('#' + BACK_PICTURE_BUTTON).removeClass('disabled');
     } else {
-      this.$el.find('#back-button').addClass('disabled');
+      this.$el.find('#' + BACK_PICTURE_BUTTON).addClass('disabled');
+    }
+    if (this.galleryIndex + 1 >= this.galleries.length) {
+      this.$el.find('#' + NEXT_GALLERY_BUTTON).addClass('disabled');
+    } else {
+      this.$el.find('#' + NEXT_GALLERY_BUTTON).removeClass('disabled');
+    }
+    if (this.galleryIndex) {
+      this.$el.find('#' + BACK_GALLERY_BUTTON).removeClass('disabled');
+    } else {
+      this.$el.find('#' + BACK_GALLERY_BUTTON).addClass('disabled');
     }
   },
   previousPicture: function previousPicture() {
-    if (this.index - 1 >= 0) {
-      this.index -= 1;
+    if (this.pictureIndex - 1 >= 0) {
+      this.pictureIndex -= 1;
       this.updateButtons();
       this.renderImage();
     }
   },
   nextPicture: function nextPicture() {
-    if (this.index + 1 < this.images.length) {
-      this.$el.find('#back-button').removeClass('disabled');
-      this.index += 1;
+    if (this.pictureIndex + 1 < this.images.length) {
+      this.pictureIndex += 1;
       this.updateButtons();
       this.renderImage();
     }
   },
+  previousGallery: function previousGallery() {
+    if (this.galleryIndex - 1 >= 0) {
+      this.galleryIndex -= 1;
+      this.setRandomImage();
+      this.updateButtons();
+      this.renderImage();
+      this.render();
+    }
+  },
+  nextGallery: function nextGallery() {
+    if (this.galleryIndex + 1 < this.galleries.length) {
+      this.galleryIndex += 1;
+      this.setRandomImage();
+      this.updateButtons();
+      this.renderImage();
+      this.render();
+    }
+  },
+  setRandomImage: function setRandomImage() {
+    this.images = this.galleries[this.galleryIndex].images;
+    var randomNumber = Math.floor(Math.random() * this.images.length);
+    this.pictureIndex = randomNumber;
+  },
+
   initialize: function initialize() {
-    this.images = fetchImages()[0].images;
-    var randomNumber = 1; //Math.floor(Math.random() * this.images.length);
-    this.index = randomNumber;
+    this.galleries = fetchImages();
+
+    var randomNumber = Math.floor(Math.random() * this.galleries.length);
+    this.galleryIndex = randomNumber;
+
+    this.setRandomImage();
+
     this.image = new Image({
-      url: this.images[randomNumber]
+      url: this.images[this.pictureIndex]
     });
+
     this.imageView = new _image2.default({
       model: this.image
     });
+
     this.setViews({
       '.carousel-image-container': this.imageView
     });
+  },
+  serialize: function serialize() {
+    return {
+      title: this.galleries[this.galleryIndex].title.toUpperCase()
+    };
   }
 });
 
@@ -494,8 +557,7 @@ exports.default = _component2.default.extend({
     return {
       url: this.model.get('url')
     };
-  },
-  manage: true
+  }
 });
 
 },{"../../../component":1,"./image.html":5,"backbone":7}],7:[function(require,module,exports){

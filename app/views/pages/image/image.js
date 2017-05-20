@@ -8,6 +8,5 @@ export default Component.extend({
     return {
       url: this.model.get('url'),
     };
-  },
-  manage: true
+  }
 });
