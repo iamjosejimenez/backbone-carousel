@@ -225,6 +225,7 @@ var Router = function (_Backbone$Router) {
   _createClass(Router, [{
     key: 'index',
     value: function index() {
+      console.log('probando');
       new _home2.default({ el: 'main' }).render();
     }
   }]);

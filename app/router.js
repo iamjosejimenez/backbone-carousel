@@ -12,6 +12,7 @@ class Router extends Backbone.Router {
   }
 
   index() {
+    console.log('probando');
     new HomePage({ el: 'main' }).render();
   }
 }
